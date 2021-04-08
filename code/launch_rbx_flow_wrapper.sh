@@ -35,11 +35,8 @@ xvfb-run -a --server-num=$((65536+$$)) --server-args="-screen 0 1600x1280x24 -ac
 	results_rbx/*/Clean_Bundles/*__CC_*_cleaned.trk results_rbx/*/Clean_Bundles/*__MCP_cleaned.trk comm.png \
 	--resolution_of_thumbnails 300 --opacity_background 0.5 -f --zoom 1.5
 
-# convert pft.png -crop 600x3600+600+0 pft.png
-# convert local.png -crop 600x3600+600+0 local.png
-
 python3.7 /CODE/generate_rbx_flow_spider_pdf.py ${N_SUBJ}_${N_SESS} 
 
 cp report.pdf report.html results_rbx/*/readme.txt ${OUT_DIR}/
-cp -L results_rbx/*/Clean_Bundles/*.trk ${OUT_DIR}/
-cp -L results_rbx/*/Transform_Centroids/*.trk ${OUT_DIR}/
+cp -L results_rbx/*/Clean_Bundles/ ${OUT_DIR}/bundles
+cp -L results_rbx/*/Transform_Centroids/ ${OUT_DIR}/centroids
