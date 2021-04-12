@@ -5,7 +5,7 @@ From: scilus/singularity-base-tractoflow
     export MATPLOTLIBRC="/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/"
 
 %setup
-    mkdir $SINGULARITY_ROOTFS/pybin $SINGULARITY_ROOTFS/human-data/ $SINGULARITY_ROOTFS/CODE/
+    mkdir $SINGULARITY_ROOTFS/pybin $SINGULARITY_ROOTFS/CODE/
     cp ../code/* $SINGULARITY_ROOTFS/CODE/
     tar -xf rbx_pop_average.tar -C $SINGULARITY_ROOTFS/
 

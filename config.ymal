@@ -1,18 +1,18 @@
 ---
 moreauto: true
-procversion: 1.0.0
-procname: rbx_flow
+procversion: 1.0.0??
+procname: rbx_flow??
 
 inputs:
   default:
-    container_path: XXXXXX.simg
+    container_path: XXXXXX.simg??
     nb_run: 27
-    vote_ratio: 0.5
+    vote_ratio: 0.4
 
   xnat:
     assessors:
-      - name: assr_tractoflow
-        proctypes: tractoflow_v1.0.0
+      - name: assr_tractoflow??
+        proctypes: tractoflow_v1.0.0??
         needs_qc: False
         resources:
           - resource: DTI_METRICS
@@ -22,17 +22,11 @@ inputs:
             ftype: FILE
             varname: fa_file
           - resource: DWI_TRK
-            fmatch: '*__local.trk'
+            fmatch: '*__ensemble.trk'
             fcount: 1
-            fdest: local.trk
+            fdest: ensemble.trk
             ftype: FILE
-            varname: local_tracking
-          - resource: DWI_TRK
-            fmatch: '*__pft.trk'
-            fcount: 1
-            fdest: pft.trk
-            ftype: FILE
-            varname: pft_tracking
+            varname: ensemble_tracking
     attrs:
       - varname: project
         object: session
@@ -70,8 +64,7 @@ command: >-
   {subject}
   {session}
   {fa_file}
-  {local_tracking}
-  {pft_tracking}
+  {ensemble_tracking}
   {nb_run}
   {vote_ratio}
 attrs:
