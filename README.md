@@ -9,6 +9,7 @@ This atlas was made to cover as much spatial extend as possible and explore as m
 Then, a shape-based pruning is applied to each bundle to remove inconsistent or spurious streamlines (outliers) [7].
 See https://zenodo.org/record/4630660# for more details.
 
+### References
     [1] Garyfallidis, Eleftherios, et al. "Recognition of white matter bundles using local and global
         streamline-based registration and clustering." NeuroImage 170 (2018): 283-295.
 
@@ -52,7 +53,8 @@ See https://zenodo.org/record/4630660# for more details.
 - *_centroids.trk
 
 ### Input assumptions and parameters choice
-Tractograms from Tractoflow should have at least 500k streamlines each
+Tractogram from Tractoflow should have at least 1M-2M streamlines
+RecobundlesX is optimized for probabilistic tractography
 RecobundlesX is robust to lesions/tumors IF the tractography was adapted for the situation
 nb_run is between 1 and 27
 vote_ratio is between 0 and 1
