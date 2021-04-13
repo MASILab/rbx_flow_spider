@@ -133,7 +133,7 @@ pdf.add_image('Left hemisphere', 'left.png', size_x=250, size_y=100, pos_x=10)
 
 pdf.add_page()
 pdf.titles('RBx_flow_V1: {}'.format(sys.argv[1]))
-pdf.add_image('Right hemisphere', 'right.png', size_x=250, size_y=70, pos_x=10)
-pdf.add_image('Commisures++', 'comm.png', size_x=150, size_y=70, pos_x=10)
+pdf.add_image('Right hemisphere', 'right.png', size_x=225, size_y=70, pos_x=10)
+pdf.add_image('Commisures++', 'comm.png', size_x=125, size_y=70, pos_x=10)
 
 pdf.output('report.pdf', 'F')
