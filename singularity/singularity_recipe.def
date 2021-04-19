@@ -45,6 +45,7 @@ From: scilus/singularity-base-tractoflow
     pip install fpdf
     pip install numpy==1.18.* --no-binary numpy
     pip install -e git://github.com/scilus/scilpy.git@e7b272e#egg=scilpy
+    pip install imageio
     sed -i '41s/.*/backend : Agg/' /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/matplotlibrc
 
     wget https://github.com/nextflow-io/nextflow/releases/download/v19.04.0/nextflow-19.04.0-all

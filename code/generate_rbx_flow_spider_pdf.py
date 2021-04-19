@@ -4,6 +4,7 @@
 from fpdf import FPDF
 import sys
 import os
+import imageio
 
 
 def parse_report(filename):
@@ -84,6 +85,11 @@ class PDF(FPDF):
                            w=size_x, h=size_y, type='PNG')
         self.set_y(pos[1]+(size_y*row)+10)
 
+def estimate_size(filename, size_y):
+    arr = imageio.imread(filename)
+    ratio = arr.shape[0] / arr.shape[1]
+    return size_y / ratio
+
 
 html_info = parse_report('report.html')
 METHODS = """RecobundlesX is a multi-atlas, multi-parameters version of Recobundles [1].
@@ -129,11 +135,11 @@ pdf.add_cell_left('Methods:', METHODS, size_y=5)
 pdf.add_page()
 pdf.titles('RBx_flow_V1: {}'.format(sys.argv[1]))
 pdf.add_cell_left('References:', REFERENCES, size_y=5)
-pdf.add_image('Left hemisphere', 'left.png', size_x=250, size_y=100, pos_x=10)
+pdf.add_image('Left hemisphere', 'left.png', size_x=estimate_size('left.png', 100), size_y=90, pos_x=10)
 
 pdf.add_page()
 pdf.titles('RBx_flow_V1: {}'.format(sys.argv[1]))
-pdf.add_image('Right hemisphere', 'right.png', size_x=225, size_y=70, pos_x=10)
-pdf.add_image('Commisures++', 'comm.png', size_x=125, size_y=70, pos_x=10)
+pdf.add_image('Right hemisphere', 'right.png', size_x=estimate_size('right.png', 70), size_y=70, pos_x=10)
+pdf.add_image('Commisures++', 'comm.png', size_x=estimate_size('comm.png', 70), size_y=70, pos_x=10)
 
 pdf.output('report.pdf', 'F')
