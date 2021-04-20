@@ -85,10 +85,16 @@ class PDF(FPDF):
                            w=size_x, h=size_y, type='PNG')
         self.set_y(pos[1]+(size_y*row)+10)
 
-def estimate_size(filename, size_y):
+
+def estimate_size(filename):
     arr = imageio.imread(filename)
     ratio = arr.shape[0] / arr.shape[1]
-    return size_y / ratio
+    if ratio < 0.75:
+        max_x = min(90 / ratio, 180)
+        return max_x, max_x * ratio
+    else:
+        max_y = min(180 * ratio, 90)
+        return max_y / ratio, max_y
 
 
 html_info = parse_report('report.html')
@@ -121,7 +127,7 @@ REFERENCES = """ [1] Garyfallidis, Eleftherios, et al. "Recognition of white mat
     clustering." 23rd ISMRM annual meeting. Toronto, Canada. 2015.
 """
 
-pdf = PDF(orientation='L', unit='mm', format='A4')
+pdf = PDF(unit='mm', format='A4')
 pdf.add_page()
 pdf.titles('RBx_flow_V1: {}'.format(sys.argv[1]))
 pdf.add_cell_left('Status:', html_info[0], size_y=5)
@@ -135,11 +141,16 @@ pdf.add_cell_left('Methods:', METHODS, size_y=5)
 pdf.add_page()
 pdf.titles('RBx_flow_V1: {}'.format(sys.argv[1]))
 pdf.add_cell_left('References:', REFERENCES, size_y=5)
-pdf.add_image('Left hemisphere', 'left.png', size_x=estimate_size('left.png', 100), size_y=90, pos_x=10)
+tmp_x, tmp_y = estimate_size('left.png')
+pdf.add_image('Left hemisphere', 'left.png',
+              size_x=tmp_x, size_y=tmp_y, pos_x=10)
 
 pdf.add_page()
 pdf.titles('RBx_flow_V1: {}'.format(sys.argv[1]))
-pdf.add_image('Right hemisphere', 'right.png', size_x=estimate_size('right.png', 70), size_y=70, pos_x=10)
-pdf.add_image('Commisures++', 'comm.png', size_x=estimate_size('comm.png', 70), size_y=70, pos_x=10)
+tmp_x, tmp_y = estimate_size('right.png')
+pdf.add_image('Right hemisphere', 'right.png',
+              size_x=tmp_x, size_y=tmp_y, pos_x=10)
+tmp_x, tmp_y = estimate_size('comm.png')
+pdf.add_image('Commisures++', 'comm.png', size_x=tmp_x, size_y=tmp_y, pos_x=10)
 
 pdf.output('report.pdf', 'F')

@@ -11,7 +11,7 @@ IN_TRACKING_ENSEMBLE=${6}
 cd /TMP/
 mkdir raw/${N_SUBJ}_${N_SESS} -p
 cp ${IN_DIR}/${IN_FA} raw/${N_SUBJ}_${N_SESS}/fa.nii.gz
-cp ${IN_DIR}/${IN_TRACKING_ENSEMBLE} raw/${N_SUBJ}_${N_SESS}/tracking.trk
+scil_filter_streamlines_by_length.py ${IN_DIR}/${IN_TRACKING_ENSEMBLE} raw/${N_SUBJ}_${N_SESS}/tracking.trk --minL 40
 
 # Relevant parameters for RBX Flow
 NB_RUN=${7}
