@@ -26,18 +26,18 @@ VOTE_RATIO=${8}
 
 # Screenshot groups of bundles for QA (Hemisphere Left, Right and then commisural pathways)
 xvfb-run -a --server-num=$((65536+$$)) --server-args="-screen 0 1600x1280x24 -ac" \
-	scil_visualize_bundles_mosaic.py raw/${N_SUBJ}_${N_SESS}/fa.nii.gz \
+	python3.8 /CODE/visualize_bundles_mosaic.py raw/${N_SUBJ}_${N_SESS}/fa.nii.gz \
 	results_rbx/*/Clean_Bundles/*_L_cleaned.trk  left.png --resolution_of_thumbnails 300 --opacity_background 0.5 -f --zoom 1.5
 xvfb-run -a --server-num=$((65536+$$)) --server-args="-screen 0 1600x1280x24 -ac" \
-	scil_visualize_bundles_mosaic.py raw/${N_SUBJ}_${N_SESS}/fa.nii.gz \
+	python3.8 /CODE/visualize_bundles_mosaic.py raw/${N_SUBJ}_${N_SESS}/fa.nii.gz \
 	results_rbx/*/Clean_Bundles/*_R_cleaned.trk  right.png --resolution_of_thumbnails 300 --opacity_background 0.5 -f --zoom 1.5
 xvfb-run -a --server-num=$((65536+$$)) --server-args="-screen 0 1600x1280x24 -ac" \
-	scil_visualize_bundles_mosaic.py raw/${N_SUBJ}_${N_SESS}/fa.nii.gz \
+	python3.8 /CODE/visualize_bundles_mosaic.py raw/${N_SUBJ}_${N_SESS}/fa.nii.gz \
 	results_rbx/*/Clean_Bundles/*__CC_*_cleaned.trk results_rbx/*/Clean_Bundles/*__MCP_cleaned.trk comm.png \
 	--resolution_of_thumbnails 300 --opacity_background 0.5 -f --zoom 1.5
 
 # Generate PDF
-python3.7 /CODE/generate_rbx_flow_spider_pdf.py ${N_SUBJ}_${N_SESS} 
+python3.8 /CODE/generate_rbx_flow_spider_pdf.py ${N_SUBJ}_${N_SESS} 
 
 # Copy relevant outputs
 cp report.pdf report.html ${OUT_DIR}/
